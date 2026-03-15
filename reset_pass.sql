@@ -1,0 +1,2 @@
+ALTER USER system IDENTIFIED BY joyal111;
+EXIT;

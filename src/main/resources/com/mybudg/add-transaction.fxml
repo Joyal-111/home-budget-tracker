@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+<?import java.lang.String?>
+
+<VBox alignment="CENTER" spacing="20.0" styleClass="transaction-container" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mybudg.AddTransactionController">
+    <padding>
+        <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
+    </padding>
+
+    <HBox alignment="CENTER_RIGHT" spacing="10">
+        <Button onAction="#minimizeWindow" styleClass="control-button, minimize-button" text="-" />
+        <Button onAction="#closeWindow" styleClass="control-button, close-button" text="×" />
+    </HBox>
+
+    <Text styleClass="form-title" text="Add New Transaction" />
+
+    <GridPane hgap="15" vgap="15">
+        <columnConstraints>
+            <ColumnConstraints minWidth="100" prefWidth="120" />
+            <ColumnConstraints hgrow="ALWAYS" minWidth="200" />
+        </columnConstraints>
+
+        <Label text="Type:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <HBox spacing="20" GridPane.columnIndex="1" GridPane.rowIndex="0">
+            <RadioButton fx:id="incomeRadio" selected="true" text="Income">
+                <toggleGroup>
+                    <ToggleGroup fx:id="typeGroup" />
+                </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="expenseRadio" text="Expense" toggleGroup="$typeGroup" />
+        </HBox>
+
+        <Label text="Amount (₹):" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <TextField fx:id="amountField" promptText="Enter amount" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+        <Label text="Category:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <ComboBox fx:id="categoryCombo" maxWidth="Infinity" promptText="Select category" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+        <Label text="Date:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <DatePicker fx:id="datePicker" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+        <Label text="Description:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <TextArea fx:id="descriptionArea" prefHeight="80" promptText="Optional details..." wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+    </GridPane>
+
+    <HBox alignment="CENTER" spacing="20">
+        <Button onAction="#handleSave" prefWidth="120" styleClass="primary-button" text="Save" />
+        <Button onAction="#handleCancel" prefWidth="120" styleClass="secondary-button" text="Cancel" />
+    </HBox>
+</VBox>

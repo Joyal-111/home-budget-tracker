@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<AnchorPane fx:id="rootPane" prefHeight="620.0" prefWidth="480.0" styleClass="auth-container" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mybudg.LoginController">
+   <children>
+      <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <!-- Custom Title Bar -->
+            <HBox fx:id="titleBar" alignment="CENTER_RIGHT" prefHeight="45.0" spacing="10.0" styleClass="title-bar-light">
+               <children>
+                  <Button fx:id="minimizeBtn" mnemonicParsing="false" onAction="#minimizeWindow" styleClass="window-btn-light" text="—" />
+                  <Button fx:id="maximizeBtn" mnemonicParsing="false" onAction="#toggleMaximize" styleClass="window-btn-light" text="▢" />
+                  <Button fx:id="closeBtn" mnemonicParsing="false" onAction="#closeWindow" styleClass="window-btn-light, close-btn-light" text="✕" />
+               </children>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </HBox>
+
+            <VBox alignment="CENTER" spacing="0.0" VBox.vgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <children>
+                  <VBox alignment="CENTER" maxWidth="400.0" minHeight="500.0" prefWidth="400.0" spacing="25.0" styleClass="glass-auth-card">
+                     <children>
+                        <!-- Fallback Logo as Label -->
+                        <Label style="-fx-font-size: 60; -fx-text-fill: white;" text="💰" />
+                        
+                        <Label styleClass="auth-title" text="Login" />
+                        
+                        <VBox maxWidth="320.0" spacing="8.0">
+                           <children>
+                              <Label text="Username" textFill="WHITE" />
+                              <TextField fx:id="usernameField" prefHeight="45.0" promptText="Enter username" styleClass="auth-input" />
+                           </children>
+                        </VBox>
+            
+                        <VBox maxWidth="320.0" spacing="8.0">
+                           <children>
+                              <Label text="Password" textFill="WHITE" />
+                              <PasswordField fx:id="passwordField" prefHeight="45.0" promptText="Enter password" styleClass="auth-input" />
+                           </children>
+                        </VBox>
+            
+                        <Button minWidth="220.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="55.0" styleClass="auth-button" text="Sign In" />
+                        
+                        <HBox alignment="CENTER" spacing="8.0">
+                           <children>
+                              <Label text="New here?" textFill="WHITE" />
+                              <Label onMouseClicked="#handleSignUp" styleClass="link-label" text="Create Account" />
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="40.0" left="35.0" right="35.0" top="35.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

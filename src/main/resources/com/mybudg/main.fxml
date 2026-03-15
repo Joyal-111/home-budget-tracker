@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane prefHeight="650.0" prefWidth="900.0" styleClass="main-container" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mybudg.MainController">
+   <children>
+      <!-- Horizontal layout for Sidebar + Content -->
+      <HBox prefHeight="650.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <!-- Sidebar -->
+            <VBox fx:id="sidebar" alignment="TOP_CENTER" prefWidth="200.0" spacing="10.0" styleClass="sidebar">
+               <padding>
+                  <Insets top="30.0" />
+               </padding>
+               <children>
+                  <Label styleClass="sidebar-logo" text="MyBudg" />
+                  <VBox alignment="CENTER_LEFT" spacing="5.0">
+                     <children>
+                        <Button onAction="#handleViewDashboard" styleClass="sidebar-button, active-sidebar-button" text="🏠  Dashboard" />
+                        <Button onAction="#handleAddTransaction" styleClass="sidebar-button" text="+  Add Transaction" />
+                        <Button onAction="#handleViewTransactions" styleClass="sidebar-button" text="〓  Transactions" />
+                        <Button onAction="#handleViewReports" styleClass="sidebar-button" text="📊  Reports" />
+                        <Button onAction="#handleManageCategories" styleClass="sidebar-button" text="📂  Categories &amp; Budgets" />
+                        <Button onAction="#handleSettings" styleClass="sidebar-button" text="⚙  Settings" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+
+            <!-- Main Content Area -->
+            <VBox HBox.hgrow="ALWAYS">
+               <children>
+                  <!-- Custom Title Bar -->
+                  <HBox fx:id="titleBar" alignment="CENTER_RIGHT" prefHeight="30.0" spacing="5.0" styleClass="title-bar">
+                     <children>
+                        <Label fx:id="windowTitle" styleClass="window-title" text="MyBudg - Dashboard" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets right="700.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Button mnemonicParsing="false" onAction="#minimizeWindow" styleClass="control-button" text="-" />
+                        <Button mnemonicParsing="false" onAction="#toggleMaximize" styleClass="control-button" text="□" />
+                        <Button mnemonicParsing="false" onAction="#closeWindow" styleClass="control-button, close-button" text="X" />
+                     </children>
+                  </HBox>
+
+                  <!-- Dynamic Content -->
+                  <VBox spacing="20.0" styleClass="content-area" VBox.vgrow="ALWAYS">
+                     <padding>
+                        <Insets bottom="20.0" left="25.0" right="25.0" top="20.0" />
+                     </padding>
+                     <children>
+                        <!-- Header Banner -->
+                        <HBox fx:id="headerSection" alignment="CENTER_LEFT" styleClass="header-banner">
+                           <padding>
+                              <Insets bottom="15.0" left="25.0" right="25.0" top="15.0" />
+                           </padding>
+                           <children>
+                              <VBox HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label fx:id="welcomeLabel" styleClass="welcome-text-large" text="Welcome back, joyal!" />
+                                    <Label fx:id="dateTimeLabel" styleClass="date-text-large" text="Saturday, March 07, 2026 | 10:19 PM" />
+                                 </children>
+                              </VBox>
+                              <Button mnemonicParsing="false" onAction="#handleLogout" styleClass="logout-button-alt" text="🚪 Logout" />
+                           </children>
+                        </HBox>
+
+                        <!-- Dashboard Card Container -->
+                        <VBox spacing="25.0" styleClass="dashboard-container-card" VBox.vgrow="ALWAYS">
+                           <padding>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </padding>
+                           <children>
+                              <!-- Summary Cards -->
+                              <HBox fx:id="cardsSection" spacing="20.0">
+                                 <children>
+                                    <VBox fx:id="incomeCard" styleClass="stat-card, income-stat" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label styleClass="stat-label" text="Total Income" />
+                                          <Label fx:id="totalIncomeLabel" styleClass="stat-value" text="₹30000.00" />
+                                       </children>
+                                    </VBox>
+                                    <VBox fx:id="expenseCard" styleClass="stat-card, expense-stat" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label styleClass="stat-label" text="Total Expense" />
+                                          <Label fx:id="totalExpenseLabel" styleClass="stat-value" text="₹3600.00" />
+                                       </children>
+                                    </VBox>
+                                    <VBox fx:id="balanceCard" styleClass="stat-card, balance-stat" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label styleClass="stat-label" text="Current Balance" />
+                                          <Label fx:id="balanceLabel" styleClass="stat-value" text="₹26400.00" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+
+
+                              <!-- Recent Transactions Section -->
+                              <VBox fx:id="tableSection" spacing="10.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Label styleClass="section-title" text="Recent Transactions" />
+                                    <TableView fx:id="recentTransactionTable" styleClass="modern-table" VBox.vgrow="ALWAYS">
+                                       <columns>
+                                          <TableColumn fx:id="recentDateColumn" prefWidth="150.0" text="Date" />
+                                          <TableColumn fx:id="recentCategoryColumn" prefWidth="250.0" text="Category" />
+                                          <TableColumn fx:id="recentAmountColumn" prefWidth="150.0" text="Amount" />
+                                          <TableColumn fx:id="recentTypeColumn" prefWidth="150.0" text="Type" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

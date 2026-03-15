@@ -1,0 +1,12 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Run Home Budget Tracker",
+            "request": "launch",
+            "mainClass": "com.mybudg.Main",
+            "projectName": "mybudg-javafx"
+        }
+    ]
+}

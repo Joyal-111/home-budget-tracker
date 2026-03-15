@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" styleClass="analysis-page-root" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mybudg.AnalysisController">
+    <children>
+        <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <!-- Custom Title Bar for Dragging and Window Controls -->
+                <HBox fx:id="titleBar" alignment="CENTER_RIGHT" prefHeight="35.0" spacing="10.0" styleClass="title-bar-light">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#minimizeWindow" styleClass="window-btn-light" text="—" />
+                        <Button mnemonicParsing="false" onAction="#toggleMaximize" styleClass="window-btn-light" text="▢" />
+                        <Button mnemonicParsing="false" onAction="#closeWindow" styleClass="window-btn-light, close-btn-light" text="✕" />
+                    </children>
+                    <padding>
+                        <Insets right="10.0" />
+                    </padding>
+                </HBox>
+
+                <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="analysis-scroll-pane">
+                    <content>
+                        <VBox spacing="25.0" styleClass="analysis-container">
+                            <padding>
+                                <Insets bottom="30.0" left="40.0" right="40.0" top="20.0" />
+                            </padding>
+                            <children>
+                                <!-- Header Section -->
+                                <HBox alignment="CENTER_LEFT" spacing="20">
+                                    <children>
+                                        <Button onAction="#handleBack" styleClass="back-button-styled" text="← Back" />
+                                        <Label styleClass="analysis-title" text="Financial Analysis" />
+                                    </children>
+                                </HBox>
+
+                                <!-- Top Row: Pie Charts -->
+                                <HBox spacing="25.0">
+                                    <children>
+                                        <VBox fx:id="card1" spacing="15.0" styleClass="chart-card-styled" HBox.hgrow="ALWAYS">
+                                            <children>
+                                                <Label styleClass="chart-header-label" text="Expense Distribution" />
+                                                <PieChart fx:id="expenseChart" prefHeight="450.0" title="Expenses by Category" legendSide="BOTTOM" />
+                                            </children>
+                                            <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
+                                        </VBox>
+
+                                        <VBox fx:id="card2" spacing="15.0" styleClass="chart-card-styled" HBox.hgrow="ALWAYS">
+                                            <children>
+                                                <Label styleClass="chart-header-label" text="Income Distribution" />
+                                                <PieChart fx:id="incomeChart" prefHeight="450.0" title="Income by Category" legendSide="BOTTOM" />
+                                            </children>
+                                            <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

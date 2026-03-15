@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="650.0" prefWidth="900.0" styleClass="main-container, mesh-background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mybudg.TransactionsController">
+   <children>
+      <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <!-- Sidebar -->
+            <VBox fx:id="sidebar" alignment="TOP_CENTER" prefWidth="200.0" spacing="10.0" styleClass="sidebar">
+               <padding>
+                  <Insets top="30.0" />
+               </padding>
+               <children>
+                  <Label styleClass="sidebar-logo" text="MyBudg" />
+                  <VBox alignment="CENTER_LEFT" spacing="5.0">
+                     <children>
+                        <Button onAction="#handleViewDashboard" styleClass="sidebar-button" text="🏠  Dashboard" />
+                        <Button onAction="#handleAddTransaction" styleClass="sidebar-button" text="+  Add Transaction" />
+                        <Button onAction="#handleViewTransactions" styleClass="sidebar-button, active-sidebar-button" text="〓  Transactions" />
+                        <Button onAction="#handleViewReports" styleClass="sidebar-button" text="📊  Reports" />
+                        <Button onAction="#handleSettings" styleClass="sidebar-button" text="⚙  Settings" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+
+            <!-- Content Area -->
+            <VBox HBox.hgrow="ALWAYS">
+               <children>
+                  <!-- Title Bar -->
+                  <HBox fx:id="titleBar" alignment="CENTER_RIGHT" prefHeight="30.0" spacing="5.0" styleClass="title-bar">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#minimizeWindow" styleClass="control-button" text="-" />
+                        <Button mnemonicParsing="false" onAction="#toggleMaximize" styleClass="control-button" text="□" />
+                        <Button mnemonicParsing="false" onAction="#closeWindow" styleClass="control-button, close-button" text="X" />
+                     </children>
+                  </HBox>
+
+                  <AnchorPane styleClass="content-area" VBox.vgrow="ALWAYS">
+                     <children>
+                        <VBox layoutX="20.0" layoutY="20.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" styleClass="glass-pane">
+                           <padding>
+                              <Insets bottom="25.0" left="30.0" right="30.0" top="25.0" />
+                           </padding>
+                           <children>
+                              <!-- Header Area -->
+                              <HBox alignment="CENTER_LEFT">
+                                 <children>
+                                    <Label styleClass="transactions-header" text="All Transactions" HBox.hgrow="ALWAYS" />
+                                    <HBox alignment="CENTER_RIGHT" spacing="15.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Button mnemonicParsing="false" onAction="#handleDelete" styleClass="quick-button, delete-button" text="🗑 Delete Selected" />
+                                          <Button mnemonicParsing="false" onAction="#handleRefresh" styleClass="quick-button" text="?? Refresh" /> <Button mnemonicParsing="false" onAction="#handleBack" styleClass="quick-button" text="? Back" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </HBox>
+
+                              <!-- Filter Bar -->
+                              <HBox alignment="CENTER_LEFT" spacing="15.0" styleClass="filter-bar">
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label text="🔍" textFill="WHITE" />
+                                          <javafx.scene.control.TextField fx:id="searchField" promptText="Search" styleClass="filter-input" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                       <children>
+                                          <Label text="📅" textFill="WHITE" />
+                                          <javafx.scene.control.DatePicker fx:id="dateFilter" prefWidth="150.0" promptText="Select Date" styleClass="filter-input" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                       <children>
+                                          <Label text="▽" textFill="WHITE" />
+                                          <javafx.scene.control.ComboBox fx:id="typeFilter" prefWidth="150.0" promptText="Type" styleClass="filter-input" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                       <children>
+                                          <Label text="⇅" textFill="WHITE" />
+                                          <javafx.scene.control.ComboBox fx:id="sortFilter" prefWidth="150.0" promptText="Sort By" styleClass="filter-input" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" top="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+
+                              <!-- Table Header Labels -->
+                              <HBox spacing="10.0" style="-fx-padding: 0 20 10 20;">
+                                 <children>
+                                    <Label minWidth="50.0" text="Select" textFill="#576574" style="-fx-font-weight: bold;" />
+                                    <Label minWidth="120.0" text="Date" textFill="#576574" style="-fx-font-weight: bold;" />
+                                    <Label minWidth="100.0" text="Type" textFill="#576574" style="-fx-font-weight: bold;" />
+                                    <Label minWidth="150.0" text="Category" textFill="#576574" style="-fx-font-weight: bold;" />
+                                    <Label minWidth="120.0" text="Amount" textFill="#576574" style="-fx-font-weight: bold;" />
+                                    <Label text="Description" textFill="#576574" style="-fx-font-weight: bold;" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+
+                              <!-- Replacing TableView with ListView for the card effect -->
+                              <javafx.scene.control.ListView fx:id="transactionListView" VBox.vgrow="ALWAYS" styleClass="list-view-transparent" />
+                              
+                              <!-- Footer / Pagination -->
+                              <HBox alignment="CENTER" spacing="10.0">
+                                 <children>
+                                    <Button styleClass="pagination-btn" text="&lt;" />
+                                    <Button styleClass="pagination-btn, pagination-btn-active" text="1" />
+                                    <Button styleClass="pagination-btn" text="2" />
+                                    <Button styleClass="pagination-btn" text="3" />
+                                    <Button styleClass="pagination-btn" text="&gt;" />
+                                    <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label fx:id="transactionCountLabel" text="Count: 0 transactions" textFill="#576574" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets top="20.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
