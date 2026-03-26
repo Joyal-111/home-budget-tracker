@@ -91,17 +91,17 @@ public class LoginController {
         }
 
         // Run login in a background task to keep UI responsive
-        javafx.concurrent.Task<Integer> loginTask = new javafx.concurrent.Task<>() {
+        javafx.concurrent.Task<User> loginTask = new javafx.concurrent.Task<>() {
             @Override
-            protected Integer call() throws Exception {
+            protected User call() throws Exception {
                 return userDAO.login(username, password);
             }
         };
 
         loginTask.setOnSucceeded(e -> {
-            int userId = loginTask.getValue();
-            if (userId != -1) {
-                UserSession.initialize(userId, username);
+            User user = loginTask.getValue();
+            if (user != null) {
+                UserSession.initialize(user.getUserId(), user.getUsername(), user.getEmail());
                 try {
                     switchToMain();
                 } catch (IOException ex) {

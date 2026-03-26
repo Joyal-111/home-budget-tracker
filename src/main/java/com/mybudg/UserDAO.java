@@ -7,24 +7,25 @@ import java.sql.SQLException;
 
 public class UserDAO {
 
-    public int login(String username, String password) {
-        String query = "SELECT USER_ID FROM USERS WHERE USERNAME = ? AND PASSWORD = ?";
+    public User login(String identifier, String password) {
+        String query = "SELECT USER_ID, USERNAME, EMAIL FROM USERS WHERE (USERNAME = ? OR EMAIL = ?) AND PASSWORD = ?";
         try (Connection conn = DatabaseConfig.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             
-            pstmt.setString(1, username);
-            pstmt.setString(2, password);
+            pstmt.setString(1, identifier);
+            pstmt.setString(2, identifier);
+            pstmt.setString(3, password);
             
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    return rs.getInt("USER_ID");
+                    return new User(rs.getInt("USER_ID"), rs.getString("USERNAME"), rs.getString("EMAIL"));
                 }
             }
         } catch (SQLException e) {
             System.err.println("Login error: " + e.getMessage());
             e.printStackTrace();
         }
-        return -1;
+        return null;
     }
 
     public int register(String username, String password, String email) {
@@ -67,5 +68,19 @@ public class UserDAO {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public String getEmail(int userId) {
+        String query = "SELECT EMAIL FROM USERS WHERE USER_ID = ?";
+        try (Connection conn = DatabaseConfig.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setInt(1, userId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) return rs.getString("EMAIL");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

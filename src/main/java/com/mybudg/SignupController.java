@@ -75,7 +75,7 @@ public class SignupController {
         signupTask.setOnSucceeded(e -> {
             int userId = signupTask.getValue();
             if (userId > 0) {
-                UserSession.initialize(userId, username);
+                UserSession.initialize(userId, username, email);
                 showAlert(Alert.AlertType.INFORMATION, "Registration Successful", "User registered successfully!");
                 try {
                     switchToMain();

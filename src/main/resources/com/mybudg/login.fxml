@@ -43,7 +43,7 @@
                         <VBox maxWidth="320.0" spacing="8.0">
                            <children>
                               <Label text="Username" textFill="WHITE" />
-                              <TextField fx:id="usernameField" prefHeight="45.0" promptText="Enter username" styleClass="auth-input" />
+                              <TextField fx:id="usernameField" prefHeight="45.0" promptText="Username or Email" styleClass="input-field" />
                            </children>
                         </VBox>
             

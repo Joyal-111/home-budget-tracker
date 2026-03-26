@@ -20,6 +20,7 @@ public class SettingsController implements Initializable {
     @FXML private PasswordField oldPasswordField;
     @FXML private PasswordField newPasswordField;
     @FXML private PasswordField confirmPasswordField;
+    @FXML private javafx.scene.control.Label emailLabel;
 
     private UserDAO userDAO = new UserDAO();
     private double xOffset = 0;
@@ -47,6 +48,11 @@ public class SettingsController implements Initializable {
         titleBar.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) toggleMaximize();
         });
+
+        // Set email label from session
+        if (UserSession.getInstance() != null) {
+            emailLabel.setText(UserSession.getInstance().getEmail());
+        }
     }
 
     @FXML
@@ -107,10 +113,6 @@ public class SettingsController implements Initializable {
         navigateTo("transactions.fxml");
     }
 
-    @FXML
-    private void handleViewReports() {
-        navigateTo("analysis.fxml");
-    }
 
     @FXML
     private void handleSettings() {

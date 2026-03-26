@@ -335,10 +335,6 @@ public class MainController implements Initializable {
         navigateTo("transactions.fxml");
     }
 
-    @FXML
-    private void handleViewReports() {
-        navigateTo("analysis.fxml");
-    }
 
     @FXML
     private void handleManageCategories() {
@@ -368,5 +364,30 @@ public class MainController implements Initializable {
     @FXML
     private void handleSettings() {
         navigateTo("settings.fxml");
+    }
+
+    @FXML
+    private void handleIncomeCardClick() {
+        navigateToDetail("INCOME");
+    }
+
+    @FXML
+    private void handleExpenseCardClick() {
+        navigateToDetail("EXPENSE");
+    }
+
+    private void navigateToDetail(String type) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("category-detail.fxml"));
+            Parent root = loader.load();
+            
+            CategoryDetailController controller = loader.getController();
+            controller.setTransactionType(type);
+            
+            Stage stage = (Stage) titleBar.getScene().getWindow();
+            stage.getScene().setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

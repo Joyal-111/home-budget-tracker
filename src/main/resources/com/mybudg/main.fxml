@@ -29,8 +29,7 @@
                         <Button onAction="#handleViewDashboard" styleClass="sidebar-button, active-sidebar-button" text="🏠  Dashboard" />
                         <Button onAction="#handleAddTransaction" styleClass="sidebar-button" text="+  Add Transaction" />
                         <Button onAction="#handleViewTransactions" styleClass="sidebar-button" text="〓  Transactions" />
-                        <Button onAction="#handleViewReports" styleClass="sidebar-button" text="📊  Reports" />
-                        <Button onAction="#handleManageCategories" styleClass="sidebar-button" text="📂  Categories &amp; Budgets" />
+
                         <Button onAction="#handleSettings" styleClass="sidebar-button" text="⚙  Settings" />
                      </children>
                   </VBox>
@@ -85,13 +84,13 @@
                               <!-- Summary Cards -->
                               <HBox fx:id="cardsSection" spacing="20.0">
                                  <children>
-                                    <VBox fx:id="incomeCard" styleClass="stat-card, income-stat" HBox.hgrow="ALWAYS">
+                                    <VBox fx:id="incomeCard" onMouseClicked="#handleIncomeCardClick" styleClass="stat-card, income-stat" HBox.hgrow="ALWAYS">
                                        <children>
                                           <Label styleClass="stat-label" text="Total Income" />
                                           <Label fx:id="totalIncomeLabel" styleClass="stat-value" text="₹30000.00" />
                                        </children>
                                     </VBox>
-                                    <VBox fx:id="expenseCard" styleClass="stat-card, expense-stat" HBox.hgrow="ALWAYS">
+                                    <VBox fx:id="expenseCard" onMouseClicked="#handleExpenseCardClick" styleClass="stat-card, expense-stat" HBox.hgrow="ALWAYS">
                                        <children>
                                           <Label styleClass="stat-label" text="Total Expense" />
                                           <Label fx:id="totalExpenseLabel" styleClass="stat-value" text="₹3600.00" />

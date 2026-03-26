@@ -270,10 +270,6 @@ public class TransactionsController implements Initializable {
         navigateTo("transactions.fxml");
     }
 
-    @FXML
-    private void handleViewReports() {
-        navigateTo("analysis.fxml");
-    }
 
     @FXML
     private void handleSettings() {

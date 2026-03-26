@@ -26,7 +26,6 @@
                         <Button onAction="#handleViewDashboard" styleClass="sidebar-button" text="🏠  Dashboard" />
                         <Button onAction="#handleAddTransaction" styleClass="sidebar-button" text="+  Add Transaction" />
                         <Button onAction="#handleViewTransactions" styleClass="sidebar-button, active-sidebar-button" text="〓  Transactions" />
-                        <Button onAction="#handleViewReports" styleClass="sidebar-button" text="📊  Reports" />
                         <Button onAction="#handleSettings" styleClass="sidebar-button" text="⚙  Settings" />
                      </children>
                   </VBox>
